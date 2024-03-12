@@ -15,7 +15,7 @@ import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 
-@DisplayName("Answer 도메인 요청 Dto 종합 테스트")
+@DisplayName("Answer 도메인 요청 Dto 단위 테스트")
 class AnswerRequestDtoTest {
 	ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
 	Validator validator = factory.getValidator();
@@ -53,8 +53,8 @@ class AnswerRequestDtoTest {
 	@DisplayName("답변 생성 요청 검증 성공 테스트 - Size")
 	void whenCreateAnswerSizeExceedsLimit_thenValidationSucceeds() {
 		AnswerDto.CreateRequest request = AnswerDto.CreateRequest.builder()
-				.content("a".repeat(10000))
-				.build();
+			.content("a".repeat(10000))
+			.build();
 
 		Set<ConstraintViolation<AnswerDto.CreateRequest>> violations = validator.validate(request);
 		Set<String> msgList = violations.stream().map(ConstraintViolation::getMessage).collect(Collectors.toSet());
@@ -66,8 +66,8 @@ class AnswerRequestDtoTest {
 	@DisplayName("답변 생성 요청 검증 실패 테스트 - MaxSize")
 	void whenCreateAnswerSizeExceedsMaxLimit_thenValidationFails() {
 		AnswerDto.CreateRequest request = AnswerDto.CreateRequest.builder()
-				.content("a".repeat(10001))
-				.build();
+			.content("a".repeat(10001))
+			.build();
 
 		Set<ConstraintViolation<AnswerDto.CreateRequest>> violations = validator.validate(request);
 		Set<String> msgList = violations.stream().map(ConstraintViolation::getMessage).collect(Collectors.toSet());
@@ -79,8 +79,8 @@ class AnswerRequestDtoTest {
 	@DisplayName("답변 생성 요청 검증 실패 테스트 - MinSize")
 	void whenCreateAnswerSizeExceedsMinLimit_thenValidationFails() {
 		AnswerDto.CreateRequest request = AnswerDto.CreateRequest.builder()
-				.content("a")
-				.build();
+			.content("a")
+			.build();
 
 		Set<ConstraintViolation<AnswerDto.CreateRequest>> violations = validator.validate(request);
 		Set<String> msgList = violations.stream().map(ConstraintViolation::getMessage).collect(Collectors.toSet());
@@ -106,8 +106,8 @@ class AnswerRequestDtoTest {
 	@DisplayName("답변 수정 요청 검증 성공 테스트 - Size")
 	void whenUpdateAnswerSizeExceedsLimit_thenValidationSucceeds() {
 		UpdateAnswerRequest updateAnswerRequest = UpdateAnswerRequest.builder()
-				.content("a".repeat(10000))
-				.build();
+			.content("a".repeat(10000))
+			.build();
 
 		Set<ConstraintViolation<UpdateAnswerRequest>> violations = validator.validate(updateAnswerRequest);
 		Set<String> msgList = violations.stream().map(ConstraintViolation::getMessage).collect(Collectors.toSet());
@@ -119,8 +119,8 @@ class AnswerRequestDtoTest {
 	@DisplayName("답변 수정 요청 검증 실패 테스트 - maxSize")
 	void whenUpdateAnswerSizeExceedsMaxLimit_thenValidationFails() {
 		UpdateAnswerRequest updateAnswerRequest = UpdateAnswerRequest.builder()
-				.content("a".repeat(10001))
-				.build();
+			.content("a".repeat(10001))
+			.build();
 
 		Set<ConstraintViolation<UpdateAnswerRequest>> violations = validator.validate(updateAnswerRequest);
 		Set<String> msgList = violations.stream().map(ConstraintViolation::getMessage).collect(Collectors.toSet());
@@ -132,8 +132,8 @@ class AnswerRequestDtoTest {
 	@DisplayName("답변 수정 요청 검증 실패 테스트 - minSize")
 	void whenUpdateAnswerSizeExceedsMinLimit_thenValidationFails() {
 		UpdateAnswerRequest updateAnswerRequest = UpdateAnswerRequest.builder()
-				.content("a")
-				.build();
+			.content("a")
+			.build();
 
 		Set<ConstraintViolation<UpdateAnswerRequest>> violations = validator.validate(updateAnswerRequest);
 		Set<String> msgList = violations.stream().map(ConstraintViolation::getMessage).collect(Collectors.toSet());
