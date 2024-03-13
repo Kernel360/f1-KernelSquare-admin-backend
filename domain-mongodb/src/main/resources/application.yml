@@ -1,4 +1,4 @@
 spring:
   data:
     mongodb:
-      uri: ${MONGO_URI}
+      uri: ENC(AjN7dXKqXwotJaOKS8TpDtDYfXpx37ixGFQz88TkgbbNYloxQEKJ7vK5P+FicD1DXz/4S/rOXTkAfZPhXonjP2iIcOV+MwkBpPopbBdV6mWCOy4ryRLaKpWqmVpjAM+wYxY2D2i9m3CAvsu26Z14Ww==)
