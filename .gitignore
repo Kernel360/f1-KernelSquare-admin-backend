@@ -13,7 +13,7 @@ member-api/logs/**
 admin-api/logs/**
 member-api/member-api/logs/**
 admin-api/admin-api/logs/**
-
+admin-api/src/test/java/com/kernelsquare/adminapi/common/config/JasyptConfigTest.java
 ### STS ###
 .apt_generated
 .classpath
