@@ -8,5 +8,5 @@ spring:
 
 jasypt:
   encryptor:
-    password: ${JASYPT_PASSWORD}
     bean: jasyptEncryptorAES
+  password: ${JASYPT_PASSWORD}
