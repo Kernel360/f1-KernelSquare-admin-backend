@@ -4,4 +4,9 @@ spring:
 
   data:
     mongodb:
-      uri: ${MONGO_TEST_URI}
+      uri: ENC(52fNKnK/iRoc8g9b+7WVM7lIL+u1ZdR42GZgRxJhSU68tu3jx3gprF9mWKeK4YZZ3HGqHpqnWDnX9KCvD1p5jE8FqFLRDJXXlFoSKYNcrxNF4wEp7MhyfFLnBGghMIGfp8fatbBwYwZ6WFbZ+PPknw==)
+
+jasypt:
+  encryptor:
+    password: ${JASYPT_PASSWORD}
+    bean: jasyptEncryptorAES
