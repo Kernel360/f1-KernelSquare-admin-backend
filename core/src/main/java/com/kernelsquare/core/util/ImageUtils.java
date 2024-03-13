@@ -3,8 +3,9 @@ package com.kernelsquare.core.util;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 @Component
@@ -18,10 +19,16 @@ public class ImageUtils {
 	}
 
 	// 클라이언트에게 받은 이미지 파일을 받아서 s3에 저장할 file path를 만듦
-	public static String makeFilePath(String category, MultipartFile multipartFile) {
+	public static String makeFilePath(String category) {
+		LocalDate currentDate = LocalDate.now();
+
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+
+		String formattedDate = currentDate.format(formatter);
+
 		UUID uuid = UUID.randomUUID();
 
-		return category + "/" + uuid + multipartFile.getOriginalFilename();
+		return formattedDate + "/" + category + "/" + uuid;
 	}
 
 	public static String parseFilePath(String url) {
