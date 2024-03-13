@@ -1,6 +1,5 @@
-package com.kernelsquare.memberapi.common.config;
+package com.kernelsquare.adminapi.common.config;
 
-import com.kernelsquare.memberapi.domain.coffeechat.dto.ChatMessageRequest;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,7 +20,7 @@ public class KafkaConsumerConfig {
 	@Value("${kafka.url}")
 	private String url;
 	@Bean
-	public ConsumerFactory<String, ChatMessageRequest> consumerFactory() {
+	public ConsumerFactory<String, Object> consumerFactory() {
 		Map<String, Object> config = new HashMap<>();
 
 		config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, url);
@@ -35,8 +34,8 @@ public class KafkaConsumerConfig {
 	}
 
 	@Bean
-	public ConcurrentKafkaListenerContainerFactory<String, ChatMessageRequest> kafkaListenerContainerFactory() {
-		ConcurrentKafkaListenerContainerFactory<String, ChatMessageRequest> factory = new ConcurrentKafkaListenerContainerFactory<>();
+	public ConcurrentKafkaListenerContainerFactory<String, Object> kafkaListenerContainerFactory() {
+		ConcurrentKafkaListenerContainerFactory<String, Object> factory = new ConcurrentKafkaListenerContainerFactory<>();
 		factory.setConsumerFactory(consumerFactory());
 		return factory;
 	}

@@ -1,4 +1,4 @@
-package com.kernelsquare.adminapi.common.config;
+package com.kernelsquare.memberapi.common.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -17,9 +17,15 @@ public class RedisConfig {
 	@Value("${spring.redis.serialization.class-property-type-name}")
 	String classPropertyTypeName;
 
+	@Value("${spring.redis.host}")
+	private String host;
+
+	@Value("${spring.redis.port}")
+	private int port;
+
 	@Bean
 	public RedisConnectionFactory redisConnectionFactory() {
-		return new LettuceConnectionFactory();
+		return new LettuceConnectionFactory(host, port);
 	}
 
 	@Bean
