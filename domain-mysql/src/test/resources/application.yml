@@ -5,8 +5,8 @@ spring:
     #    url: jdbc:h2:mem:test_kernel_square;MODE=MySQL
     url: jdbc:h2:mem:test_kernel_square
     driver-class-name: org.h2.Driver
-    username: ${LOCAL_DB_HOST}
-    password: ${LOCAL_DB_PASSWORD}
+#    username: ${LOCAL_DB_HOST}
+#    password: ${LOCAL_DB_PASSWORD}
 
   jpa:
     hibernate:
