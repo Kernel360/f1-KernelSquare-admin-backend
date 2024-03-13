@@ -1,48 +1,24 @@
 spring:
   datasource:
-    #    ToDo service test 부분 mocking 작업이 끝나면 추가 작업할 예정
-    #    url: ${TEST_DB_URL}
-    #    url: jdbc:h2:mem:test_kernel_square;MODE=MySQL
-    url: jdbc:h2:mem:test_kernel_square
-    driver-class-name: org.h2.Driver
-    username: ${LOCAL_DB_HOST}
-    password: ${LOCAL_DB_PASSWORD}
-
-  flyway:
-    enabled: false
-
-  security:
-    jwt:
-      header: Authorization
-      secret: ${JWT_SECRET_KEY}
-      access-token-validity-in-seconds: 3600     # 1시간
-      refresh-token-validity-in-seconds: 1_209_600  # 2주
+    url: ENC(N98sWH4qx4cX7tlo3QYfclJWQ8tPnxirEaDN7uuerhg2ljlcJ1YmbTAmWMlPNKreEezXZJeAFR+KMTf3VP3Xt3B/QG3rLLVif1wwP7ee0CwPcywLLa8AM79BffKEzp+xN+M3jYKQglnZCDvgLJClUOKVpxE0MngAoMSFE/NnUA3Sj0K87UI1TVTinfZF+W9HJg5Qe9nHHmCHruvjUEKXC6c9E6q1rwHPTpPc06MyePM=)
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ENC(uBSvgVXH/i+xhwgNsOJLeghEGyd8MAWJLFDbYGL7zpJwQHA20x1qVCrXAGXS51Oc)
+    password: ENC(kq6tEYy7LcsgD2e7L2NTcajRcGRuvIyFP3N6lqrLT+nRpAJgkTIP5tTIUR0XB+Pz)
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
 
     properties:
       hibernate:
-        #        show-sql: true
         format_sql: true
-    #        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
 
-    database-platform: org.hibernate.dialect.H2Dialect
+    database: mysql
 
-    defer-datasource-initialization: true
-
-  sql:
-    init:
-      mode: never
+    database-platform: org.hibernate.dialect.MySQL8Dialect
 
   jackson:
     property-naming-strategy: SNAKE_CASE
-
-  #  data:
-  #    redis:
-  #      host: localhost
-  #      port: 6380
 
   redis:
     serialization:
@@ -50,24 +26,40 @@ spring:
 
   data:
     mongodb:
-      uri: ${MONGO_TEST_URI}
+      uri: ENC(52fNKnK/iRoc8g9b+7WVM7lIL+u1ZdR42GZgRxJhSU68tu3jx3gprF9mWKeK4YZZ3HGqHpqnWDnX9KCvD1p5jE8FqFLRDJXXlFoSKYNcrxNF4wEp7MhyfFLnBGghMIGfp8fatbBwYwZ6WFbZ+PPknw==)
+
+  security:
+    jwt:
+      header: Authorization
+      secret: ENC(oxVpr8cy4kmSSeaEWtwUjVujta/KmjC8mwBgxw7QnvABt91g/lnA8n0v9nR8BJq2pb3/8ynzaojJoFqnxA9Re7+HmbSNECXJSVgu+SZQuZTsgjmxrvl2Crdgn1Fhpg0D1N/KVNl9VLb3SubJyraNRktmVdReaJxPhyQ+5WVT41QmsIGq5ha9hURznM9GYuwh06JLwJ/PnSHLr1IWHRyoqDAlnHUu9e5AG60pEi1G/Ej+Ty12HijG8dB1eEN9JrHMNAk4HFi5g861u5i1m6fjVKbBGQbCEA8pY43z2d6PiCPxwkpLTQuNwITi8kiQuJbh)
+      access-token-validity-in-seconds: 3600     # 1시간
+      refresh-token-validity-in-seconds: 1_209_600  # 2주
+
+  flyway:
+    enabled: false
+    baseline-on-migrate: true
 
 logging.level:
   org.hibernate.SQL: debug
   #  org.hibernate.type: trace
   org.springframework.security: debug
 
-custom:
-  domain:
-    image:
-      baseUrl: ${BASE_URL}
-
 cloud:
   aws:
     s3:
-      bucket: ${S3_BUCKET_NAME}
+      bucket: ENC(u27jm43DJzYKxSVLza8l5zwr5rTZGLnOCYWoXs1HD0aCnzFrbZYReBER8JvtDRtaedIPTSwQb/QFh4a9KYOPgw==)
     stack.auto: false
-    region.static: ${S3_REGION}
+    region.static: ENC(O7tEweMpqbTUthoymndfjAsP3gXyoVh8uQaJUzMVv/yN1U+1rmNa10DHNVA2qEzK)
     credentials:
-      accessKey: ${AWS_ACCESS_KEY}
-      secretKey: ${AWS_ACCESS_SECRET}
+      accessKey: ENC(vSqshpfgtV+Gnqz8nZCWC5lbbH7fycffGav8+V8zvspO7XHMdAgDAyY4FDlqyMLJGb4iz52TJZ8D3tMe4wgPUw==)
+      secretKey: ENC(tqLdvJ5yGBHGBrAP03WkwnqVLJvF/PsVDv+C9kvS1JKd3lPPWVHdkNujxw4JpyUwK748QFYvtJ+lGcnj3irm5JN2hQKUWCljMG8cDKrfeTY=)
+
+jasypt:
+  encryptor:
+    password: ${JASYPT_PASSWORD}
+    bean: jasyptEncryptorAES
+
+custom:
+  domain:
+    image:
+      baseUrl: ENC(UGLM7Z+GxC2FNA4Uh/k5aVS9QoN3fe/tFOmqJbhvpz2bsL3eL6Vl4hsGfm2zTx6fLFx+3X6BdrmYZtvu9P7vc/Ibh8DGVerG8RUtvin3Jh8Y7wlZUiImhiIeUoseuLc9)

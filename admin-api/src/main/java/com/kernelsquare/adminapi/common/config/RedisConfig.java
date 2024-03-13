@@ -1,4 +1,4 @@
-package com.kernelsquare.memberapi.common.config;
+package com.kernelsquare.adminapi.common.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
