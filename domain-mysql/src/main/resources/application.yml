@@ -1,9 +1,9 @@
 spring:
   datasource:
-    url: ${LOCAL_DB_URL}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&characterEncoding=UTF-8
+    url: ENC(TsnGO0t3jrI5tGUbtsCMCuS6nqR+2NfsGgUgqNmVxZ2Z92wdUXKxKD2Co7LrOoMLObya/Zf9E4dhxplg53QjOey3ggadTJyKpt7yv1Svrew0OI6e7vtckzsMbq/9hZaTCUUC20Z2b2lbwcHNo28Iojfi+9Jhrdxy56Hk1Pef5YquTXcicOt2Bmds9MV2bO2ECVVIMjiBh89myT+Dza4yfJnr9g0s2vU68GGAiJWVlA2at9xzAuZOenUsGXlPpIH/67us7WiphwEU3IYK+784yQ==)
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: ${LOCAL_DB_HOST}
-    password: ${LOCAL_DB_PASSWORD}
+    username: ENC(vo+sZllavQ5dUMAS+k1SsGSJf5BrTZtXzqnaX4bN0GMTEy68fNhJQRj8j5odRvUx)
+    password: ENC(Wy92J68MUYaK1KYa7MFDLaFId5UjF7aXXwVtm1gAzaWf6N9x62XpTfX4+7775DbS)
 
   jpa:
 
@@ -22,12 +22,6 @@ spring:
 
   jackson:
     property-naming-strategy: SNAKE_CASE
-
-  ## file upload max size (파일 업로드 크기 설정)
-  #  servlet:
-  #    multipart:
-  #      max-file-size: 20MB
-  #      max-request-size: 20MB
 
   flyway:
     enabled: true
