@@ -54,8 +54,8 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           password: ${{ secrets.EC2_PASSWORD }}
-          scripts: |
+          script: |
             sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_IMAGE }}
-            sudo docker stop $(sudo docker ps -q) 2>/dev/null || true
-            sudo docker run --name ${{ secrets.DOCKERHUB_IMAGE }} --rm -d -p 8080:8080 ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_IMAGE }}
+            sudo docker stop $(sudo docker ps --filter "ancestor=${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_IMAGE }}" -q) 2>/dev/null || true
+            sudo docker run --name ${{ secrets.DOCKERHUB_IMAGE }} --rm -d -p ${{ secrets.DOCKERHUB_PORT }}:${{ secrets.DOCKERHUB_PORT }} ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_IMAGE }}
             sudo docker system prune -f
