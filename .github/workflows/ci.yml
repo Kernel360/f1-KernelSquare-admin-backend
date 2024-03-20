@@ -50,19 +50,14 @@ jobs:
         env:
           jasypt.password: ${{ secrets.JASYPT_PASSWORD }}
 
-      - name: Run chmod to make gradlew executable
-        run: chmod +x ./gradlew
-
-      - name: Test with Gradle
-        run: ./gradlew test
-
       - name: Build admin-api with Gradle
         run: |
           cd admin-api
-          ./gradlew build -x test
+          chmod +x ./gradlew
+          ./gradlew clean build
 
       - name: Build alert-api with Gradle
         run: |
           cd alert-api
           chmod +x ./gradlew
-          ./gradlew build -x test
+          ./gradlew clean build
