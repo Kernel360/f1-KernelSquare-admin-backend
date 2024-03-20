@@ -30,6 +30,19 @@ jobs:
         env:
           jasypt.password: ${{ secrets.JASYPT_PASSWORD }}
 
+      - name: Set up alert-api application.yml
+        uses: microsoft/variable-substitution@v1
+        with:
+          files: ./alert-api/src/main/resources/application.yml
+        env:
+          spring.data.mongodb.uri: ${{ secrets.MONGO_URI }}
+          spring.datasource.url: ${{ secrets.LOCAL_DB_URL }}
+          spring.datasource.username: ${{ secrets.LOCAL_DB_HOST }}
+          spring.datasource.password: ${{ secrets.LOCAL_DB_PASSWORD }}
+          spring.security.jwt.secret: ${{ secrets.JWT_SECRET_KEY }}
+          kafka.url: ${{ secrets.KAFKA_URL }}
+          custom.domain.image.baseUrl: ${{ secrets.BASE_URL }}
+
       - name: Set up domain-mongodb test application.yml
         uses: microsoft/variable-substitution@v1
         with:
@@ -43,7 +56,12 @@ jobs:
       - name: Test with Gradle
         run: ./gradlew test
 
-      - name: Build with Gradle
+      - name: Build admin-api with Gradle
         run: |
           cd admin-api
+          ./gradlew build -x test
+
+      - name: Build alert-api with Gradle
+        run: |
+          cd alert-api
           ./gradlew build -x test
