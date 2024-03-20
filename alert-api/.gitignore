@@ -1,24 +1,10 @@
 HELP.md
 .gradle
 build/
-logs/**
-!logs
-!logs/.gitkeep
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
-core/src/main/java/com/kernelsquare/core/compose/data/db/**
-src/main/java/com/kernel360/kernelsquare/global/compose/mongo/**
 
-admin-api/logs/**
-alert-api/logs/**
-
-admin-api/admin-api/logs/**
-alert-api/alert-api/logs/**
-
-alert-api/src/main/resources/static/docs/**
-
-admin-api/src/test/java/com/kernelsquare/adminapi/common/config/JasyptConfigTest.java
 ### STS ###
 .apt_generated
 .classpath
@@ -46,7 +32,6 @@ out/
 /dist/
 /nbdist/
 /.nb-gradle/
-.DS_Store
 
 ### VS Code ###
 .vscode/
