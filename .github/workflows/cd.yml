@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 jobs:
-  if_merge:
+  if-merge:
     if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'
     runs-on: ubuntu-latest
     steps:
@@ -44,11 +44,13 @@ jobs:
       - name: Build admin-api with Gradle
         run: |
           cd admin-api
-          ./gradlew clean build -x test
+          chmod +x ./gradlew
+          ./gradlew clean build
 
       - name: Build alert-api with Gradle
         run: |
           cd alert-api
+          chmod +x ./gradlew
           ./gradlew clean build
 
       - name: DockerHub Login
