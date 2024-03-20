@@ -82,12 +82,12 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           password: ${{ secrets.EC2_PASSWORD }}
           script: |
-            sudo docker stop $(sudo docker ps --filter "ancestor=${{ secrets.DOCKERHUB_USERNAME }}/kernelsquare-admin" -q) 2>/dev/null || true
-            sudo docker stop $(sudo docker ps --filter "ancestor=${{ secrets.DOCKERHUB_USERNAME }}/kernelsquare-alert" -q) 2>/dev/null || true
-            sudo docker rm $(sudo docker ps -a --filter "ancestor=${{ secrets.DOCKERHUB_USERNAME }}/kernelsquare-admin" -q) 2>/dev/null || true
-            sudo docker rm $(sudo docker ps -a --filter "ancestor=${{ secrets.DOCKERHUB_USERNAME }}/kernelsquare-alert" -q) 2>/dev/null || true
+            sudo docker stop admin
+            sudo docker stop alert
+            sudo docker rm admin
+            sudo docker rm alert
             sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/kernelsquare-admin
             sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/kernelsquare-alert
-            sudo docker run --name admin --rm -d -p 8500:8500 ${{ secrets.DOCKERHUB_USERNAME }}/kernelsquare-admin
-            sudo docker run --name alert --rm -d -p 8503:8503 ${{ secrets.DOCKERHUB_USERNAME }}/kernelsquare-alert
+            sudo docker run --name admin -d -p 8500:8500 ${{ secrets.DOCKERHUB_USERNAME }}/kernelsquare-admin
+            sudo docker run --name alert -d -p 8503:8503 ${{ secrets.DOCKERHUB_USERNAME }}/kernelsquare-alert
             sudo docker system prune -f
