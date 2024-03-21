@@ -82,7 +82,6 @@ bootJar {
         into 'static/docs'
     }
 }
-출처: https://myvelop.tistory.com/214#Build.gradle (Groovy)-1 [MYVELOP 마이벨롭:티스토리]
 
 tasks.named('jar') {
     enabled = false
