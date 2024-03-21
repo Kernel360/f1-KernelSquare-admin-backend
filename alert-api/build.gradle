@@ -72,7 +72,7 @@ asciidoctor {
 task copyHTML(type: Copy) {
     dependsOn tasks.findByName("asciidoctor")
     from file("build/docs/asciidoc")
-    into file("src/main/resources/static/docs")
+    into file("static/docs")
 }
 
 tasks.bootJar {
