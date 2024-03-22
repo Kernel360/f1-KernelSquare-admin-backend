@@ -41,6 +41,18 @@ jobs:
           kafka.url: ${{ secrets.KAFKA_URL }}
           custom.domain.image.baseUrl: ${{ secrets.BASE_URL }}
 
+      - name: Set up chatting-api application.yml
+        uses: microsoft/variable-substitution@v1
+        with:
+          files: ./chatting-api/src/main/resources/application.yml
+        env:
+          spring.data.mongodb.uri: ${{ secrets.MONGO_URI }}
+          spring.datasource.url: ${{ secrets.LOCAL_DB_URL }}
+          spring.datasource.username: ${{ secrets.LOCAL_DB_HOST }}
+          spring.datasource.password: ${{ secrets.LOCAL_DB_PASSWORD }}
+          kafka.url: ${{ secrets.KAFKA_URL }}
+          custom.domain.image.baseUrl: ${{ secrets.BASE_URL }}
+
       - name: Build admin-api with Gradle
         run: |
           cd admin-api
@@ -50,6 +62,12 @@ jobs:
       - name: Build alert-api with Gradle
         run: |
           cd alert-api
+          chmod +x ./gradlew
+          ./gradlew clean build
+
+      - name: Build chatting-api with Gradle
+        run: |
+          cd chatting-api
           chmod +x ./gradlew
           ./gradlew clean build
 
@@ -65,11 +83,17 @@ jobs:
       - name: alert-api Docker Image Build
         run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/kernelsquare-alert ./alert-api
 
+      - name: chatting-api Docker Image Build
+        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/kernelsquare-chatting ./chatting-api
+
       - name: admin-api DockerHub Push
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/kernelsquare-admin
 
       - name: alert-api DockerHub Push
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/kernelsquare-alert
+
+      - name: chatting-api DockerHub Push
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/kernelsquare-chatting
 
   deploy:
     needs: if-merge
@@ -82,12 +106,16 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           password: ${{ secrets.EC2_PASSWORD }}
           script: |
-            sudo docker stop admin
-            sudo docker stop alert
-            sudo docker rm admin
-            sudo docker rm alert
+            sudo docker stop admin || true
+            sudo docker stop alert || true
+            sudo docker stop chatting || true
+            sudo docker rm admin || true
+            sudo docker rm alert || true
+            sudo docker rm chatting || true
             sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/kernelsquare-admin
             sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/kernelsquare-alert
+            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/kernelsquare-chatting
             sudo docker run --name admin -d -p 8500:8500 ${{ secrets.DOCKERHUB_USERNAME }}/kernelsquare-admin
             sudo docker run --name alert -d -p 8503:8503 ${{ secrets.DOCKERHUB_USERNAME }}/kernelsquare-alert
+            sudo docker run --name chatting -d -p 8504:8504 ${{ secrets.DOCKERHUB_USERNAME }}/kernelsquare-chatting
             sudo docker system prune -f
