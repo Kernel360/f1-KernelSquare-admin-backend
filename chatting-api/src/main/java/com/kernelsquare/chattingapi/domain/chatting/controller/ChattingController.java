@@ -6,6 +6,7 @@ import com.kernelsquare.core.common_response.error.exception.BusinessException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -24,5 +25,10 @@ public class ChattingController {
             default -> throw new BusinessException(CoffeeChatErrorCode.MESSAGE_TYPE_NOT_VALID);
         }
         kafkaTemplate.send("chatting", message);
+    }
+
+    @GetMapping("/environment")
+    public String getEnv() {
+        return "chatting";
     }
 }
