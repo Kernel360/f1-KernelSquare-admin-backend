@@ -4,4 +4,4 @@ include 'domain-mongodb'
 include 'domain-mysql'
 include 'admin-api'
 include 'alert-api'
-
+include 'chatting-api'
