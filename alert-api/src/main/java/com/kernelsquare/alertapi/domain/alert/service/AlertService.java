@@ -1,13 +1,13 @@
 package com.kernelsquare.alertapi.domain.alert.service;
 
+import com.kernelsquare.alertapi.domain.alert.dto.AlertDto;
 import com.kernelsquare.domainmongodb.domain.alert.command.AlertCommand;
 import com.kernelsquare.domainmongodb.domain.alert.entity.Alert;
-import com.kernelsquare.domainmongodb.domain.alert.info.AlertInfo;
 
 import java.util.List;
 
 public interface AlertService {
-    List<AlertInfo> findAllAlerts(AlertCommand.FindCommand command);
+    List<AlertDto.MessageResponse> findAllAlerts(AlertCommand.FindCommand command);
 
     void sendToClient(Alert alert);
 

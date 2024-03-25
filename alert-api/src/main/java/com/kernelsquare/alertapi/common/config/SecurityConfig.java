@@ -31,6 +31,7 @@ public class SecurityConfig {
 		"/actuator",
 		"/actuator/**",
 		"/docs/**",
+		"/environment",
 	};
 
 	private final String[] hasAnyAuthorityPatterns = new String[] {
