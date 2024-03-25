@@ -6,11 +6,13 @@ import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -111,17 +113,19 @@ class AlertControllerTest extends RestDocsControllerTest {
 
 		MemberAdapter memberAdapter = new MemberAdapter(MemberAdaptorInstance.of(member));
 
-		AlertDto.FindAllResponse findAllResponse = AlertDto.FindAllResponse.builder()
-			.recipientId("1")
-			.recipient("시나모롤")
-			.senderId("2")
-			.sender("강형욱")
-			.message("므헷헷헷x999999")
+		AlertDto.MessageResponse findAllResponse = AlertDto.MessageResponse.builder()
+			.id("alt_y8fWs19jzJFhZwi4")
 			.alertType(Alert.AlertType.QUESTION_REPLY)
+			.recipient("시나모롤")
 			.sendTime(LocalDateTime.now())
+			.payload(Map.of(
+				"questionTitle", "관리자의 미덕",
+				"sender", "고김홍",
+				"questionId", "10"
+			))
 			.build();
 
-		List<AlertDto.FindAllResponse> findAllResponseList = List.of(findAllResponse);
+		List<AlertDto.MessageResponse> findAllResponseList = List.of(findAllResponse);
 
 		AlertDto.PersonalFindAllResponse response = AlertDto.PersonalFindAllResponse.from(findAllResponseList);
 
@@ -143,20 +147,20 @@ class AlertControllerTest extends RestDocsControllerTest {
 					fieldWithPath("data").type(JsonFieldType.OBJECT).description("데이터"),
 					fieldWithPath("code").type(JsonFieldType.NUMBER).description("응답 상태 코드"),
 					fieldWithPath("msg").type(JsonFieldType.STRING).description("응답 메시지"),
-					fieldWithPath("data.personal_alert_list[].recipient_id").type(JsonFieldType.STRING)
+					fieldWithPath("data.personal_alert_list[].id").type(JsonFieldType.STRING)
 						.description("알림 수신자 ID"),
-					fieldWithPath("data.personal_alert_list[].recipient").type(JsonFieldType.STRING)
-						.description("알림 수신자 닉네임"),
-					fieldWithPath("data.personal_alert_list[].sender_id").type(JsonFieldType.STRING)
-						.description("알림 송신자 ID"),
-					fieldWithPath("data.personal_alert_list[].sender").type(JsonFieldType.STRING)
-						.description("알림 송신자 닉네임"),
-					fieldWithPath("data.personal_alert_list[].message").type(JsonFieldType.STRING)
-						.description("알림 메시지"),
 					fieldWithPath("data.personal_alert_list[].alert_type").type(JsonFieldType.STRING)
 						.description("알림 타입"),
+					fieldWithPath("data.personal_alert_list[].recipient").type(JsonFieldType.STRING)
+						.description("알림 수신자 닉네임"),
 					fieldWithPath("data.personal_alert_list[].send_time").type(JsonFieldType.STRING)
-						.description("알림 보낸 시간")
+						.description("알림 보낸 시간"),
+					fieldWithPath("data.personal_alert_list[].payload.questionTitle").type(JsonFieldType.STRING)
+						.description("질문 답변 알림 - 질문 제목"),
+					fieldWithPath("data.personal_alert_list[].payload.sender").type(JsonFieldType.STRING)
+						.description("질문 답변 알림 - 답변 작성자"),
+					fieldWithPath("data.personal_alert_list[].payload.questionId").type(JsonFieldType.STRING)
+						.description("질문 답변 알림 - 질문 ID")
 				)));
 
 		//verify

@@ -7,6 +7,7 @@ import lombok.Builder;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 public class AlertDto {
     @Builder
@@ -15,7 +16,6 @@ public class AlertDto {
         String recipient,
         String senderId,
         String sender,
-        String message,
         Alert.AlertType alertType,
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = TimeResponseFormat.PATTERN)
         LocalDateTime sendTime
@@ -23,12 +23,33 @@ public class AlertDto {
 
     @Builder
     public record PersonalFindAllResponse(
-        List<FindAllResponse> personalAlertList
+        List<AlertDto.MessageResponse> personalAlertList
     ) {
-        public static PersonalFindAllResponse from(List<FindAllResponse> personalAlert) {
+        public static PersonalFindAllResponse from(List<AlertDto.MessageResponse> personalAlert) {
             return new PersonalFindAllResponse(
                 personalAlert
             );
         }
     }
+
+    @Builder
+    public record MessageResponse(
+        String id,
+        Alert.AlertType alertType,
+        String recipient,
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = TimeResponseFormat.PATTERN)
+        LocalDateTime sendTime,
+        Map<String, String> payload
+    ) {
+        public static MessageResponse from(Alert alert) {
+            return MessageResponse.builder()
+                .id(alert.getId())
+                .alertType(alert.getAlertType())
+                .recipient(alert.getRecipient())
+                .sendTime(alert.getSendTime())
+                .payload(alert.getPayload())
+                .build();
+        }
+    }
+
 }
