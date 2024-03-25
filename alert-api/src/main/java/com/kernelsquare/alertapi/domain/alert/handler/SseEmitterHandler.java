@@ -1,5 +1,6 @@
 package com.kernelsquare.alertapi.domain.alert.handler;
 
+import com.kernelsquare.alertapi.domain.alert.dto.AlertDto;
 import com.kernelsquare.domainmongodb.domain.alert.entity.Alert;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -40,12 +41,14 @@ public class SseEmitterHandler {
     public void sendEmitter(Alert alert) {
         SseEmitter emitter = getEmitter(Long.valueOf(alert.getRecipientId()));
 
+        AlertDto.MessageResponse data = AlertDto.MessageResponse.from(alert);
+
         if (Objects.nonNull(emitter)) {
             try {
                 emitter.send(SseEmitter.event()
-                    .id(alert.getRecipientId())
-                    .name(alert.getAlertType().name())
-                    .data(alert, MediaType.APPLICATION_JSON));
+                    .id(data.id())
+                    .name(data.alertType().name())
+                    .data(data, MediaType.APPLICATION_JSON));
             } catch (IOException e) {
                 deleteEmitter(Long.valueOf(alert.getRecipientId()));
                 emitter.completeWithError(e);

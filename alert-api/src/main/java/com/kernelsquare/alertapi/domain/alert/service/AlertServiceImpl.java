@@ -1,9 +1,9 @@
 package com.kernelsquare.alertapi.domain.alert.service;
 
+import com.kernelsquare.alertapi.domain.alert.dto.AlertDto;
 import com.kernelsquare.alertapi.domain.alert.manager.SseManager;
 import com.kernelsquare.domainmongodb.domain.alert.command.AlertCommand;
 import com.kernelsquare.domainmongodb.domain.alert.entity.Alert;
-import com.kernelsquare.domainmongodb.domain.alert.info.AlertInfo;
 import com.kernelsquare.domainmongodb.domain.alert.repository.AlertReader;
 import com.kernelsquare.domainmongodb.domain.alert.repository.AlertStore;
 import lombok.RequiredArgsConstructor;
@@ -21,9 +21,9 @@ public class AlertServiceImpl implements AlertService {
 
 
     @Override
-    public List<AlertInfo> findAllAlerts(AlertCommand.FindCommand command) {
+    public List<AlertDto.MessageResponse> findAllAlerts(AlertCommand.FindCommand command) {
         return alertReader.findAllAlerts(command.memberId()).stream()
-            .map(AlertInfo::of)
+            .map(AlertDto.MessageResponse::from)
             .toList();
     }
 
