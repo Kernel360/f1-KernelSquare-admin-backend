@@ -47,7 +47,7 @@ spring:
   security:
     jwt:
       header: Authorization
-      secret: ENC(oxVpr8cy4kmSSeaEWtwUjVujta/KmjC8mwBgxw7QnvABt91g/lnA8n0v9nR8BJq2pb3/8ynzaojJoFqnxA9Re7+HmbSNECXJSVgu+SZQuZTsgjmxrvl2Crdgn1Fhpg0D1N/KVNl9VLb3SubJyraNRktmVdReaJxPhyQ+5WVT41QmsIGq5ha9hURznM9GYuwh06JLwJ/PnSHLr1IWHRyoqDAlnHUu9e5AG60pEi1G/Ej+Ty12HijG8dB1eEN9JrHMNAk4HFi5g861u5i1m6fjVKbBGQbCEA8pY43z2d6PiCPxwkpLTQuNwITi8kiQuJbh)
+      secret: ENC(B9+O8/5Znce3YNtU3zb15rR6Ig4XXg4d6TNFWkoiwW87dhQbzDEj3k448xZ7PA4u5bMnor2v2Kkecraik4EYRpH4EJ7+NO2tMSS3MTVBa3tjrK4T/j8ow2D6Dlto5sGkr8ZzRAgG9aI7q3XoW/fH/Vd8zkoag5Cr/Nb8R4QisHFu6xZrRqyI9AWQpql9XwB3r7sbG60KJcpgqdyBFIPFQqt/Wop1hui0O+qV7Z4dcpl1Bd/ltOO/BAWXA/WkiNFirxX0ukqE+MVpSZzC+GSTrXPDI7d/5Ni4ogl5mZVsGWvUrbsZDfmcpjh6/LDr5ueH)
       access-token-validity-in-seconds: 3600     # 1시간
       refresh-token-validity-in-seconds: 1_209_600  # 2주
 
