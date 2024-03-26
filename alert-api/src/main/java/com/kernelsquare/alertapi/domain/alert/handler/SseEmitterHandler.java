@@ -40,8 +40,7 @@ public class SseEmitterHandler {
             try {
                 emitter.send(SseEmitter.event()
                     .name("연결 확인")
-                    .data("연결 확인", MediaType.APPLICATION_JSON)
-                    .reconnectTime(10000L));
+                    .data("연결 확인", MediaType.APPLICATION_JSON));
             } catch (IOException e) {
                 deleteEmitter(memberId);
                 emitter.completeWithError(e);
