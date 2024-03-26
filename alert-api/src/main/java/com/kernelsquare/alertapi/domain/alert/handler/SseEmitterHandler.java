@@ -34,6 +34,18 @@ public class SseEmitterHandler {
 
         emitter.onCompletion(() -> deleteEmitter(memberId));
         emitter.onTimeout(emitter::complete);
+        emitter.onError(e -> emitter.complete());
+
+        if (Objects.nonNull(emitter)) {
+            try {
+                emitter.send(SseEmitter.event()
+                    .name("연결 확인")
+                    .data("연결 확인", MediaType.APPLICATION_JSON));
+            } catch (IOException e) {
+                deleteEmitter(memberId);
+                emitter.completeWithError(e);
+            }
+        }
 
         return emitter;
     }
