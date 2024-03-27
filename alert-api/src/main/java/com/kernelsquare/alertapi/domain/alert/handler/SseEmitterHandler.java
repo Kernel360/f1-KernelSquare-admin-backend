@@ -28,20 +28,19 @@ public class SseEmitterHandler {
     }
 
     public SseEmitter createEmitter(Long memberId) {
-        SseEmitter emitter = new SseEmitter(DEFAULT_TIMEOUT);
+        SseEmitter emitter = new SseEmitter(60000L);
 
         addEmitter(memberId, emitter);
 
         emitter.onCompletion(() -> deleteEmitter(memberId));
-        emitter.onTimeout(emitter::complete);
-        emitter.onError(e -> emitter.complete());
+        emitter.onTimeout(() -> deleteEmitter(memberId));
+        emitter.onError(e -> deleteEmitter(memberId));
 
         if (Objects.nonNull(emitter)) {
             try {
                 emitter.send(SseEmitter.event()
                     .name("연결 확인")
-                    .data("연결 확인", MediaType.APPLICATION_JSON)
-                    .reconnectTime(5000L));
+                    .data("연결 확인", MediaType.APPLICATION_JSON));
             } catch (IOException e) {
                 deleteEmitter(memberId);
                 emitter.completeWithError(e);
@@ -67,5 +66,9 @@ public class SseEmitterHandler {
                 emitter.completeWithError(e);
             }
         }
+    }
+
+    public ConcurrentHashMap<Long, SseEmitter> getEmitters() {
+        return emitters;
     }
 }
