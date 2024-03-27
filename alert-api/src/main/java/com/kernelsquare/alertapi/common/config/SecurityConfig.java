@@ -32,10 +32,11 @@ public class SecurityConfig {
 		"/actuator/**",
 		"/docs/**",
 		"/environment",
+		"/api/v1/alerts/**",
 	};
 
 	private final String[] hasAnyAuthorityPatterns = new String[] {
-		"/api/v1/alerts/**",
+//		"/api/v1/alerts/**",
 	};
 
 	@Bean
@@ -54,7 +55,7 @@ public class SecurityConfig {
 			.requestMatchers(HttpMethod.GET, "/api/v1/test").permitAll()
 
 			// 모든 권한에 대한 접근 허용
-			.requestMatchers(hasAnyAuthorityPatterns).authenticated()
+//			.requestMatchers(hasAnyAuthorityPatterns).authenticated()
 		);
 
 		http.addFilterBefore(new JWTSettingFilter(tokenProvider), BasicAuthenticationFilter.class);
