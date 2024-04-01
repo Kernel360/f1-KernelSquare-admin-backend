@@ -1,4 +1,4 @@
-package com.kernelsquare.adminapi.common.config;
+package com.kernelsquare.core.config;
 
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.jasypt.encryption.StringEncryptor;

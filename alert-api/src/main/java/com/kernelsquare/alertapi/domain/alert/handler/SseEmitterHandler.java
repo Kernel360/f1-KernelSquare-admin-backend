@@ -28,7 +28,7 @@ public class SseEmitterHandler {
     }
 
     public SseEmitter createEmitter(Long memberId) {
-        SseEmitter emitter = new SseEmitter(60000L);
+        SseEmitter emitter = new SseEmitter(DEFAULT_TIMEOUT);
 
         addEmitter(memberId, emitter);
 
