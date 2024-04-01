@@ -1,0 +1,60 @@
+spring:
+  config:
+    activate:
+      on-profile: prod-server
+
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+
+  data:
+    mongodb:
+      uri: ENC(AjN7dXKqXwotJaOKS8TpDtDYfXpx37ixGFQz88TkgbbNYloxQEKJ7vK5P+FicD1DXz/4S/rOXTkAfZPhXonjP2iIcOV+MwkBpPopbBdV6mWCOy4ryRLaKpWqmVpjAM+wYxY2D2i9m3CAvsu26Z14Ww==)
+
+  datasource:
+    url: ENC(TsnGO0t3jrI5tGUbtsCMCuS6nqR+2NfsGgUgqNmVxZ2Z92wdUXKxKD2Co7LrOoMLObya/Zf9E4dhxplg53QjOey3ggadTJyKpt7yv1Svrew0OI6e7vtckzsMbq/9hZaTCUUC20Z2b2lbwcHNo28Iojfi+9Jhrdxy56Hk1Pef5YquTXcicOt2Bmds9MV2bO2ECVVIMjiBh89myT+Dza4yfJnr9g0s2vU68GGAiJWVlA2at9xzAuZOenUsGXlPpIH/67us7WiphwEU3IYK+784yQ==)
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ENC(vo+sZllavQ5dUMAS+k1SsGSJf5BrTZtXzqnaX4bN0GMTEy68fNhJQRj8j5odRvUx)
+    password: ENC(Wy92J68MUYaK1KYa7MFDLaFId5UjF7aXXwVtm1gAzaWf6N9x62XpTfX4+7775DbS)
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    open-in-view: false
+
+  security:
+    jwt:
+      header: Authorization
+      secret: ENC(B9+O8/5Znce3YNtU3zb15rR6Ig4XXg4d6TNFWkoiwW87dhQbzDEj3k448xZ7PA4u5bMnor2v2Kkecraik4EYRpH4EJ7+NO2tMSS3MTVBa3tjrK4T/j8ow2D6Dlto5sGkr8ZzRAgG9aI7q3XoW/fH/Vd8zkoag5Cr/Nb8R4QisHFu6xZrRqyI9AWQpql9XwB3r7sbG60KJcpgqdyBFIPFQqt/Wop1hui0O+qV7Z4dcpl1Bd/ltOO/BAWXA/WkiNFirxX0ukqE+MVpSZzC+GSTrXPDI7d/5Ni4ogl5mZVsGWvUrbsZDfmcpjh6/LDr5ueH)
+
+logging.level:
+  org.springframework.security: debug
+
+kafka:
+  url: ENC(BoWks584Ld/FHNwAQw0DVnr6zzfYzo62ewM1XU3bocyghH9UKDtP1lEdziKIbxqW)
+
+custom:
+  domain:
+    image:
+      baseUrl: ENC(UGLM7Z+GxC2FNA4Uh/k5aVS9QoN3fe/tFOmqJbhvpz2bsL3eL6Vl4hsGfm2zTx6fLFx+3X6BdrmYZtvu9P7vc/Ibh8DGVerG8RUtvin3Jh8Y7wlZUiImhiIeUoseuLc9)
+
+jasypt:
+  encryptor:
+    bean: jasyptEncryptorAES
+  password: ${JASYPT_PASSWORD}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus, health, info, metrics, tempo
+
+server:
+  port: 8503
