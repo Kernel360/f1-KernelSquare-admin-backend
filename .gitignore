@@ -18,9 +18,11 @@ admin-api/admin-api/logs/**
 alert-api/alert-api/logs/**
 chatting-api/chatting-api/logs/**
 
-admin-api/src/test/java/com/kernelsquare/adminapi/common/config/JasyptConfigTest.java
+core/src/test/java/com/kernelsquare/core/config/JasyptConfigTest.java
 
 alert-api/src/main/resources/application-local.yml
+
+chatting-api/src/main/resources/application-local.yml
 ### STS ###
 .apt_generated
 .classpath
