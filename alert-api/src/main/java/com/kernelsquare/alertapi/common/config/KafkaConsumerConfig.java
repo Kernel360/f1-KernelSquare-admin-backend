@@ -31,6 +31,8 @@ public class KafkaConsumerConfig {
 		config.put(ErrorHandlingDeserializer.KEY_DESERIALIZER_CLASS, StringDeserializer.class);
 		config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, ErrorHandlingDeserializer.class);
 		config.put(ErrorHandlingDeserializer.VALUE_DESERIALIZER_CLASS, JsonDeserializer.class);
+		config.put(JsonDeserializer.TYPE_MAPPINGS,
+			"Alert:com.kernelsquare.domainmongodb.domain.alert.entity.Alert");
 		config.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
 		config.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
 
