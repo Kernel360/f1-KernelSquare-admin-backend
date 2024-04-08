@@ -3,7 +3,6 @@ package com.kernelsquare.domainmysql.domain.coffeechat.repository;
 import com.kernelsquare.core.common_response.error.code.CoffeeChatErrorCode;
 import com.kernelsquare.core.common_response.error.exception.BusinessException;
 import com.kernelsquare.domainmysql.config.DBConfig;
-import com.kernelsquare.domainmysql.config.JpaConfig;
 import com.kernelsquare.domainmysql.domain.coffeechat.entity.ChatRoom;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

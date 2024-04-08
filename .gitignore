@@ -20,6 +20,8 @@ chatting-api/chatting-api/logs/**
 
 core/src/test/java/com/kernelsquare/core/config/JasyptConfigTest.java
 
+admin-api/src/main/resources/application-local.yml
+
 alert-api/src/main/resources/application-local.yml
 
 chatting-api/src/main/resources/application-local.yml

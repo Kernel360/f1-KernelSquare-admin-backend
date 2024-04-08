@@ -1,0 +1,99 @@
+spring:
+  config:
+    activate:
+      on-profile: prod-server
+
+  datasource:
+    url: ENC(TsnGO0t3jrI5tGUbtsCMCuS6nqR+2NfsGgUgqNmVxZ2Z92wdUXKxKD2Co7LrOoMLObya/Zf9E4dhxplg53QjOey3ggadTJyKpt7yv1Svrew0OI6e7vtckzsMbq/9hZaTCUUC20Z2b2lbwcHNo28Iojfi+9Jhrdxy56Hk1Pef5YquTXcicOt2Bmds9MV2bO2ECVVIMjiBh89myT+Dza4yfJnr9g0s2vU68GGAiJWVlA2at9xzAuZOenUsGXlPpIH/67us7WiphwEU3IYK+784yQ==)
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ENC(vo+sZllavQ5dUMAS+k1SsGSJf5BrTZtXzqnaX4bN0GMTEy68fNhJQRj8j5odRvUx)
+    password: ENC(Wy92J68MUYaK1KYa7MFDLaFId5UjF7aXXwVtm1gAzaWf6N9x62XpTfX4+7775DbS)
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+    properties:
+      hibernate:
+        format_sql: true
+        show-sql: true
+
+    database: mysql
+
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+
+
+  # file upload max size (파일 업로드 크기 설정)
+  servlet:
+    multipart:
+      max-file-size: 3MB
+      max-request-size: 3MB
+
+
+  redis:
+    serialization:
+      class-property-type-name: RefreshToken.class
+    host: ENC(rldaR14yK8lZrjgv3VVwcxOv3RmJCpuvdvNcm5IDyi4XWIETc1Dt8PsCLANmey+e)
+    port: ENC(G7lvGcKcaeSmvbvL4s1bAIL3K0YNjH6VHaxGBFJ04/ORFFLp8hLMdZr3kAaGRH0u)
+
+  data:
+    mongodb:
+      uri: ENC(AjN7dXKqXwotJaOKS8TpDtDYfXpx37ixGFQz88TkgbbNYloxQEKJ7vK5P+FicD1DXz/4S/rOXTkAfZPhXonjP2iIcOV+MwkBpPopbBdV6mWCOy4ryRLaKpWqmVpjAM+wYxY2D2i9m3CAvsu26Z14Ww==)
+
+  security:
+    jwt:
+      header: Authorization
+      secret: ENC(B9+O8/5Znce3YNtU3zb15rR6Ig4XXg4d6TNFWkoiwW87dhQbzDEj3k448xZ7PA4u5bMnor2v2Kkecraik4EYRpH4EJ7+NO2tMSS3MTVBa3tjrK4T/j8ow2D6Dlto5sGkr8ZzRAgG9aI7q3XoW/fH/Vd8zkoag5Cr/Nb8R4QisHFu6xZrRqyI9AWQpql9XwB3r7sbG60KJcpgqdyBFIPFQqt/Wop1hui0O+qV7Z4dcpl1Bd/ltOO/BAWXA/WkiNFirxX0ukqE+MVpSZzC+GSTrXPDI7d/5Ni4ogl5mZVsGWvUrbsZDfmcpjh6/LDr5ueH)
+      access-token-validity-in-seconds: 3600     # 1시간
+      refresh-token-validity-in-seconds: 1_209_600  # 2주
+
+  flyway:
+    enabled: false
+    baseline-on-migrate: true
+    out-of-order: true
+
+logging.level:
+  org.hibernate.SQL: debug
+  #  org.hibernate.type: trace
+  org.springframework.security: debug
+
+cloud:
+  aws:
+    s3:
+      bucket: ENC(u27jm43DJzYKxSVLza8l5zwr5rTZGLnOCYWoXs1HD0aCnzFrbZYReBER8JvtDRtaedIPTSwQb/QFh4a9KYOPgw==)
+    stack.auto: false
+    region.static: ENC(O7tEweMpqbTUthoymndfjAsP3gXyoVh8uQaJUzMVv/yN1U+1rmNa10DHNVA2qEzK)
+    credentials:
+      accessKey: ENC(vSqshpfgtV+Gnqz8nZCWC5lbbH7fycffGav8+V8zvspO7XHMdAgDAyY4FDlqyMLJGb4iz52TJZ8D3tMe4wgPUw==)
+      secretKey: ENC(tqLdvJ5yGBHGBrAP03WkwnqVLJvF/PsVDv+C9kvS1JKd3lPPWVHdkNujxw4JpyUwK748QFYvtJ+lGcnj3irm5JN2hQKUWCljMG8cDKrfeTY=)
+
+kafka:
+  url: ENC(BoWks584Ld/FHNwAQw0DVnr6zzfYzo62ewM1XU3bocyghH9UKDtP1lEdziKIbxqW)
+
+custom:
+  domain:
+    image:
+      baseUrl: ENC(UGLM7Z+GxC2FNA4Uh/k5aVS9QoN3fe/tFOmqJbhvpz2bsL3eL6Vl4hsGfm2zTx6fLFx+3X6BdrmYZtvu9P7vc/Ibh8DGVerG8RUtvin3Jh8Y7wlZUiImhiIeUoseuLc9)
+
+chatgpt:
+  rest-api-key: ENC(ePC1/RoAfMveYG80mr+KWCnl11atHlSllUmGISq7zWI51j4gubk854CXBEKUXlcDu51YYZfRnuJXUxhOVVUULlPSpXl++lE/VqZ/LukCwzoYmxGSBknMsmkXzOyo4p1v)
+  chat-api-url: https://api.openai.com/v1/chat/completions
+
+jasypt:
+  encryptor:
+    bean: jasyptEncryptorAES
+  password: ${JASYPT_PASSWORD}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus, health, info, metrics
+#  observations:
+#    key-values:
+server:
+  port: 8500
+#      application: KS_SingleModule  #태그
