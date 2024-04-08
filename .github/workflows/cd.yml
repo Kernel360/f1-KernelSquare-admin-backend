@@ -24,21 +24,21 @@ jobs:
       - name: Set up admin-api application.yml
         uses: microsoft/variable-substitution@v1
         with:
-          files: ./admin-api/src/main/resources/application.yml
+          files: ./admin-api/src/main/resources/application-prod.yml
         env:
           jasypt.password: ${{ secrets.JASYPT_PASSWORD }}
 
       - name: Set up alert-api application.yml
         uses: microsoft/variable-substitution@v1
         with:
-          files: ./alert-api/src/main/resources/application.yml
+          files: ./alert-api/src/main/resources/application-prod.yml
         env:
           jasypt.password: ${{ secrets.JASYPT_PASSWORD }}
 
       - name: Set up chatting-api application.yml
         uses: microsoft/variable-substitution@v1
         with:
-          files: ./chatting-api/src/main/resources/application.yml
+          files: ./chatting-api/src/main/resources/application-prod.yml
         env:
           jasypt.password: ${{ secrets.JASYPT_PASSWORD }}
 
